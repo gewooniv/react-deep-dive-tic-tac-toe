@@ -1,19 +1,4 @@
-const initialGameboard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export default function Gameboard({ onClickSquare, turns }) {
-  let gameboard = initialGameboard;
-
-  for (const turn of turns) {
-    const { player, square } = turn;
-    const { row, col } = square;
-
-    gameboard[row][col] = player;
-  }
-
+export default function Gameboard({ onClickSquare, gameboard }) {
   // const [gameboard, setGameboard] = useState(initialGameboard);
 
   // function handleClickSquare(rowIndex, colIndex) {
@@ -35,7 +20,10 @@ export default function Gameboard({ onClickSquare, turns }) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => onClickSquare(rowIndex, colIndex)}>
+                <button
+                  onClick={() => onClickSquare(rowIndex, colIndex)}
+                  disabled={playerSymbol !== null}
+                >
                   {playerSymbol}
                 </button>
               </li>
